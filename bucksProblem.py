@@ -1,4 +1,5 @@
 '''
+Day 1:
 So far this code could find a path from the source to the target node
 but I don't figure out why this code can't find all possible paths.
 
@@ -7,18 +8,27 @@ pretty good.
 
 In this code, I use the recursion method to do the DFS search. So I had a 
 great start of this new try. 
+
+Day 2:
+I figured out the problem with left yesterday.
+1, the list copy problem - reference problem
+2, the path record problem - still relate the the list copy
+
+Basiclly, today I finished this problem.
 '''
 
 import itertools
 moves = [(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)]
 bucks = [8, 5, 3]
 		
-
+# this code is used to generate the move combs by index. In this case,
+# I used memes in order to save time.
 # def moves():
 # 	idx = range(3)
 # 	return list(itertools.permutations(idx, 2))
 
 def move_to(state, moves):
+# this one is used to create a pssible move based on the state
 	states = []
 	
 	for move in moves:
@@ -41,6 +51,9 @@ def move_to(state, moves):
 	return states
 
 def DFS(queue, visited, path, target):
+# this one fail, due to 
+# 1- the list copy problem
+# 2- the current visited track is wrong
 	if len(queue) < 1:
 		return
 	state = queue.pop()
@@ -60,7 +73,7 @@ def DFS(queue, visited, path, target):
 
 def dfs(start, target):
 	'''
-	Still here has the problem of recording the visited notes
+	this one solved all the problem of previous version
 	'''
 	result = []
 	queue = [(start,[])]
@@ -86,6 +99,3 @@ if __name__ == '__main__':
 	print 'Possible ways: ', len(result)
 	for i in sorted(result, key=lambda x:x[0]):
 		print i
-	# can = [[8, 0, 0], [0, 0, 0]]
-	# test = [0,0,0]
-	# print test not in can
